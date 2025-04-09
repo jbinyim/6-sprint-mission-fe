@@ -1,10 +1,10 @@
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Items from "./pages/Items";
 import Footer from "./components/Footer";
 import Registration from "./pages/Registration";
+import Board from "./pages/Board";
 
 function App() {
   return (
@@ -14,10 +14,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/items" element={<Items />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/boards" element={<Board />} />
       </Routes>
       <Footer />
     </BrowserRouter>
-
   );
 }
 

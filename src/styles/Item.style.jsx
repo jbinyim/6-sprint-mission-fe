@@ -112,6 +112,14 @@ const Like = styled.p`
   font-weight: 500;
 `;
 
+const Loading = styled.div`
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  margin-top: 10%;
+  font-size: 30px;
+`;
+
 const styles = {
   Section,
   TitleSearchBox,
@@ -130,6 +138,7 @@ const styles = {
   Price,
   LikeBox,
   Like,
+  Loading,
 };
 
 export default styles;

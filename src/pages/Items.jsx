@@ -21,7 +21,7 @@ const Items = () => {
   };
 
   if (isLoading) {
-    return <div>Loading....</div>;
+    return <styles.Loading>Loading....</styles.Loading>;
   }
 
   return (
