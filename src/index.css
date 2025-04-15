@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+body {
+  font-family: pretendard;
+}
+
+@theme {
+  --color-primary: #3692ff;
+
+  --breakpoint-tablet: 500px;
+  --breakpoint-pc: 744px;
+}
