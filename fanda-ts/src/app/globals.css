@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --primary100: #3692ff;
+  --primary200: #1967d6;
+  --primary300: #1251aa;
+  --gray50: #f9fafb;
+  --gray100: #f3f4f6;
+  --gray200: #e5e7eb;
+  --gray400: #9ca3af;
+  --gray500: #6b7280;
+  --gray600: #4b5563;
+  --gray700: #374151;
+  --gray800: #1f2937;
+  --gray900: #111827;
+  --error: #f74747;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@theme inline {
+  /* 반응형 */
+  --breakpoint-mobile: 375px;
+  --breakpoint-tablet: 744px;
+  --breakpoint-pc: 1200px;
+
+  /* 색상 */
+  --color-primary100: var(--primary100);
+  --color-primary200: var(--primary200);
+  --color-primary300: var(--primary300);
+  --color-gray50: var(--gray50);
+  --color-gray100: var(--gray100);
+  --color-gray200: var(--gray200);
+  --color-gray400: var(--gray400);
+  --color-gray500: var(--gray500);
+  --color-gray600: var(--gray600);
+  --color-gray700: var(--gray700);
+  --color-gray800: var(--gray800);
+  --color-gray900: var(--gray900);
+  --color-error: var(--error);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Pretendard";
+}
