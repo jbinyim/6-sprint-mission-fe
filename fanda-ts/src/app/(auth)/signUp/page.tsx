@@ -9,6 +9,7 @@ import Link from "next/link";
 import NickNameInput from "../_components/NickNameInput";
 import PasswordCheck from "../_components/PasswordCheck";
 import { emailRegex } from "@/utils/tools";
+import userApi from "@/lib/userApi";
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>("");
@@ -33,11 +34,22 @@ const SignUp = () => {
     }
   }, [email, nickname, password, passwordCheck]);
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await userApi.register(email, nickname, password);
+
+      console.log("회원가입 성공");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <main className="flex justify-center pt-[80px] text-gray800">
       <section>
         <LogoDiv />
-        <form className="flex flex-col gap-[16px]">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-[16px]">
           <EmailInput state={email} setState={setEmail} />
           <NickNameInput state={nickname} setState={setNickname} />
           <PasswordInput state={password} setState={setPassword} />
@@ -47,9 +59,12 @@ const SignUp = () => {
             password={password}
           />
           <button
+            disabled={!isFilled}
             className={`w-[343px] tablet:w-[640px] h-[56px] ${
-              isFilled ? "bg-primary100" : "bg-gray400"
-            } text-white font-[20px] rounded-[40px] cursor-pointer`}
+              isFilled
+                ? "bg-primary100 cursor-pointer"
+                : "bg-gray400 cursor-not-allowed"
+            } text-white font-[20px] rounded-[40px]`}
           >
             회원가입
           </button>
