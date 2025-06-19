@@ -10,6 +10,8 @@ import NickNameInput from "../_components/NickNameInput";
 import PasswordCheck from "../_components/PasswordCheck";
 import { emailRegex } from "@/utils/tools";
 import userApi from "@/lib/userApi";
+import LoginModal from "@/components/common/modals/LoginModal";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>("");
@@ -17,6 +19,12 @@ const SignUp = () => {
   const [password, setPassword] = useState<string>("");
   const [passwordCheck, setPasswordCheck] = useState<string>("");
   const [isFilled, setIsFilled] = useState<boolean>(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/login");
+  };
 
   useEffect(() => {
     if (
@@ -39,6 +47,7 @@ const SignUp = () => {
     try {
       await userApi.register(email, nickname, password);
 
+      setIsModal(true);
       console.log("회원가입 성공");
     } catch (e) {
       console.log(e);
@@ -77,6 +86,9 @@ const SignUp = () => {
           </Link>
         </p>
       </section>
+      {isModal && (
+        <LoginModal text="회원가입이 완료되었습니다!" onClick={handleClick} />
+      )}
     </main>
   );
 };

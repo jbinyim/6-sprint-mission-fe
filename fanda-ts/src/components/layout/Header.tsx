@@ -5,10 +5,12 @@ import React from "react";
 import Btn from "../common/buttons/Btn";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const router = useRouter();
   const currentPath = usePathname();
+  const { user, logout } = useAuth();
 
   if (currentPath === "/login" || currentPath === "/signUp") return;
 
@@ -36,31 +38,39 @@ const Header = () => {
               />
             </Link>
           </li>
-          <li className="text-[18px] font-[700] text-gray600 tablet:ml-[35px] pc:ml-[47px]">
-            <Link href={"/board"}>자유게시판</Link>
-          </li>
-          <li className="text-[18px] font-[700] text-gray600 tablet:ml-[30px]">
-            <Link href={"/market"}>중고마켓</Link>
-          </li>
+          {/* 로그인 후 */}
+          {user && (
+            <>
+              <li className="text-[18px] font-[700] text-gray600 tablet:ml-[35px] pc:ml-[47px]">
+                <Link href={"/board"}>자유게시판</Link>
+              </li>
+              <li className="text-[18px] font-[700] text-gray600 tablet:ml-[30px]">
+                <Link href={"/market"}>중고마켓</Link>
+              </li>
+            </>
+          )}
         </ul>
-        {/* 로그인 전 */}
-        <Btn
-          status="default"
-          width="128"
-          height="48"
-          onClick={() => router.push("/login")}
-        >
-          로그인
-        </Btn>
-        {/* 로그인 후 */}
-        {/* <div className="flex items-center gap-[6px] cursor-pointer">
-          <img
-            src="/icons/profile-lg.png"
-            alt="프로필 사진"
-            className="w-[40px] h-[40px]"
-          />
-          <p className="text-gray600 mobile:hidden tablet:block">김코드</p>
-        </div> */}
+        {user ? (
+          <div className="flex items-center gap-[6px] cursor-pointer">
+            <img
+              src="/icons/profile-lg.png"
+              alt="프로필 사진"
+              className="w-[40px] h-[40px]"
+            />
+            <p className="text-gray600 mobile:hidden tablet:block">
+              {user.nickname}
+            </p>
+          </div>
+        ) : (
+          <Btn
+            status="default"
+            width="128"
+            height="48"
+            onClick={() => router.push("/login")}
+          >
+            로그인
+          </Btn>
+        )}
       </div>
     </header>
   );

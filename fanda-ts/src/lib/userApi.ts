@@ -22,4 +22,42 @@ const register = async (email: string, nickname: string, password: string) => {
   }
 };
 
-export default { register };
+const signIn = async (email: string, password: string) => {
+  try {
+    const res = await fetch(`${BASE_URL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!res.ok) {
+      throw new Error("로그인에 실패 했습니다!");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+const fetchToken = async () => {
+  try {
+    const res = await fetch(`${BASE_URL}/token/refresh`, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+export default { register, signIn, fetchToken };
