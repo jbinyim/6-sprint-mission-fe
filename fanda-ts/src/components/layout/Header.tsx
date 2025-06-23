@@ -6,11 +6,22 @@ import Btn from "../common/buttons/Btn";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import userApi from "@/lib/userApi";
 
 const Header = () => {
   const router = useRouter();
   const currentPath = usePathname();
   const { user, logout } = useAuth();
+
+  const handleClickLogout = async () => {
+    try {
+      await userApi.signOut();
+      logout();
+      console.log("로그아웃 성공");
+    } catch (e) {
+      console.log("로그아웃 실패", e);
+    }
+  };
 
   if (currentPath === "/login" || currentPath === "/signUp") return;
 
@@ -51,7 +62,10 @@ const Header = () => {
           )}
         </ul>
         {user ? (
-          <div className="flex items-center gap-[6px] cursor-pointer">
+          <div
+            className="flex items-center gap-[6px] cursor-pointer"
+            onClick={handleClickLogout}
+          >
             <img
               src="/icons/profile-lg.png"
               alt="프로필 사진"

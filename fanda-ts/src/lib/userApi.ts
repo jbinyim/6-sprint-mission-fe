@@ -60,4 +60,19 @@ const fetchToken = async () => {
   }
 };
 
-export default { register, signIn, fetchToken };
+const signOut = async () => {
+  try {
+    const res = await fetch(`${BASE_URL}/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    const data = res.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+export default { register, signIn, fetchToken, signOut };
