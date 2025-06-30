@@ -25,9 +25,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
+  console.log(user, accessToken);
+
   useEffect(() => {
     const getToken = async () => {
       const data = await userApi.fetchToken();
+
       if (data) {
         setAccessToken(data.accessToken);
         setUser(data.user);

@@ -3,6 +3,7 @@
 import Btn from "@/components/common/buttons/Btn";
 import FilterDropDown from "@/components/common/dropDowns/FilterDropDown";
 import { useResponsive } from "@/utils/response";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const dummyCards = [
@@ -22,6 +23,7 @@ const dummyCards = [
 const SellingProducts = () => {
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [filterMenu, setFilterMenu] = useState<string>("최신순");
+  const router = useRouter();
 
   const { isMobile, isTablet, isPc } = useResponsive();
 
@@ -37,7 +39,12 @@ const SellingProducts = () => {
         <nav className="w-[343px] mx-auto">
           <div className="flex items-center justify-between mb-[8px]">
             <p className="text-[20px] font-bold text-gray900">판매 중인 상품</p>
-            <Btn status="default" width="133" height="42">
+            <Btn
+              status="default"
+              width="133"
+              height="42"
+              onClick={() => router.push("/market/productRegister")}
+            >
               상품 등록하기
             </Btn>
           </div>
@@ -74,7 +81,12 @@ const SellingProducts = () => {
               placeholder="검색할 상품을 입력해주세요"
               className="w-[242px] h-[42px] rounded-[12px] bg-gray100 px-[16px] placeholder:text-gray400 outline-none"
             />
-            <Btn status="default" width="133" height="42">
+            <Btn
+              status="default"
+              width="133"
+              height="42"
+              onClick={() => router.push("/market/productRegister")}
+            >
               상품 등록하기
             </Btn>
             <span
